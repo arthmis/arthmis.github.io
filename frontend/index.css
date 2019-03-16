@@ -14,14 +14,22 @@ nav {
     /* margin: 0;
     padding: 0; */
     box-shadow: 5px;
-    justify-content: space-evenly;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+nav > ul {
+    width: 100%;
+}
+
+#home {
+    /* align-self: flex-start; */
 }
 
 #github {
     margin-left: 95%;
-    height: 80%;
-    display: inline-flex;
+    /* align-self: flex-end; */
 }
 
 #content {
@@ -32,4 +40,5 @@ nav {
 
 .menu {
     list-style-type: none;
+    background-image: url("icons/github.svg");
 }
