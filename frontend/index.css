@@ -1,57 +1,71 @@
+@font-face {
+    font-family: "Source Sans Pro";
+    src: url("fonts/SourceSansPro-Regular.ttf") format("truetype");
+}
+
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     background: white;
     font-size: 16px;
-    font-family: sans-serif;
+    /* font-family: sans-serif; */
+    font-family: "Source Sans Pro", sans-serif;
 
 }
 header {
-    height: 10%;
+    height: 8%;
+    font-size: 1em;
 }
 nav {
-    height: 8%;
+    height: 7%;
     width: 100%;
-    box-shadow: 5px 4px 10px #bbbbbb;
-    /* border-bottom-style: solid;  */
+    box-shadow: 5px 4px 10px #dddddd;
     display: flex;
     width: 100%;
     align-items: center;
     justify-content: space-between;
     position: fixed;
     top: 0;
-    padding-right: 1em;
-    padding-left: 1em;
-    padding-bottom: 3em;
     background-color: rgba(255, 255, 255, 0.95);
-
 }
 
-h2 {
-    font-size: 1em;
-}
-
-.menu {
-    /* background-image: url("icons/github.svg"); */
+nav > h1 {
+    padding-left: 1em;
 }
 
 #home {
-    /* align-self: center; */
+    font-size: 0.8em;
+    text-decoration: none;
 }
 
 #github {
-    /* align-self: center; */
+    padding-right: 2.5em;
 }
 
 #content {
     display: flex;
+    max-width: 70em;
     flex-direction: column;
     align-items: center;
-    justify-items: center;
+    justify-content: center;
     line-height: 1.5;
-    padding-top: 80px;
-    /* padding-right: 1em;
-    padding-left: 1em; */
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+article {
+    width: 80%;
+    text-align: left;
+    margin-bottom: 1em;
+}
+
+article > h2 > a {
+    font-size: 1.2em;
+    text-decoration: none;
+}
+
+article > p {
+    font-size: 20px;
 }
