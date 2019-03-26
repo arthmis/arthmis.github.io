@@ -39,6 +39,10 @@ nav > h1 {
     text-decoration: none;
 }
 
+#home > a:link, a:visited {
+    color: rgba(87, 177, 255, 255);
+}
+
 #github {
     padding-right: 2.5em;
 }
@@ -69,3 +73,19 @@ article > h2 > a {
 article > p {
     font-size: 20px;
 }
+
+.article-title > a:link {
+    color: rgba(87, 177, 255, 255);
+}
+
+.article-title > a:visited {
+    color: rgba(87, 177, 255, 255);
+}
+
+.article-title:hover {
+    cursor: pointer;
+}
+
+.article-title:hover > a {
+    color: rgba(37, 125, 203, 255);
+}    
