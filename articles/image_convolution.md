@@ -11,6 +11,8 @@
 
 - preferable to make them odd in height and width
 - using even sized kernels can lead to aliasing?(have to look that up)
+- using border pixels to deal with out of bounds kernels seems preferable
+- other acceptable choices are wrapping and mirroring
 
 ### Different filters
 

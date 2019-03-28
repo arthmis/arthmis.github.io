@@ -24,13 +24,23 @@ nav {
     display: flex;
     width: 100%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     position: fixed;
     top: 0;
     background-color: rgba(255, 255, 255, 0.95);
 }
 
-nav > h1 {
+nav > div {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    max-width: 80em;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#nav-ul > div > h1 {
     padding-left: 1em;
 }
 
@@ -44,7 +54,7 @@ nav > h1 {
 }
 
 #github {
-    padding-right: 2.5em;
+    padding-right: 2.0em;
 }
 
 #content {
@@ -66,7 +76,7 @@ article {
 }
 
 article > h2 > a {
-    font-size: 1.2em;
+    font-size: 1em;
     text-decoration: none;
 }
 
