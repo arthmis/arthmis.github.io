@@ -6,4 +6,5 @@ edition = "2018"
 
 [dependencies]
 typed-html = "0.2.0"
+horrorshow = "0.6.6"
 pulldown-cmark = "0.4.0"

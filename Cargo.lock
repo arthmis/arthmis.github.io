@@ -572,6 +572,7 @@ dependencies = [
 name = "generate_html"
 version = "0.1.0"
 dependencies = [
+ "horrorshow 0.6.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "pulldown-cmark 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "typed-html 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -616,6 +617,11 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "unicode-segmentation 1.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
+
+[[package]]
+name = "horrorshow"
+version = "0.6.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "hostname"
@@ -2028,6 +2034,7 @@ dependencies = [
 "checksum getopts 0.2.18 (registry+https://github.com/rust-lang/crates.io-index)" = "0a7292d30132fb5424b354f5dc02512a86e4c516fe544bb7a25e7f266951b797"
 "checksum h2 0.1.17 (registry+https://github.com/rust-lang/crates.io-index)" = "910a5e7be6283a9c91b3982fa5188368c8719cce2a3cf3b86048673bf9d9c36b"
 "checksum heck 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)" = "20564e78d53d2bb135c343b3f47714a56af2061f1c928fdb541dc7b9fdd94205"
+"checksum horrorshow 0.6.6 (registry+https://github.com/rust-lang/crates.io-index)" = "597674f6c0cc85b1ad05a5383aad6809d4f85e935cdd96961faaa69d8896b624"
 "checksum hostname 0.1.5 (registry+https://github.com/rust-lang/crates.io-index)" = "21ceb46a83a85e824ef93669c8b390009623863b5c195d1ba747292c0c72f94e"
 "checksum htmlescape 0.3.1 (registry+https://github.com/rust-lang/crates.io-index)" = "e9025058dae765dee5070ec375f591e2ba14638c63feff74f13805a72e523163"
 "checksum http 0.1.16 (registry+https://github.com/rust-lang/crates.io-index)" = "fe67e3678f2827030e89cc4b9e7ecd16d52f132c0b940ab5005f88e821500f6a"
