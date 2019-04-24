@@ -1,5 +1,5 @@
 +++
-title = ""
+title = "Histogram Specification"
 description = ""
 
 # The date of the post.
