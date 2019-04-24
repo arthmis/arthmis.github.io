@@ -1,6 +1,6 @@
 +++
 title = "CSS Styling"
-description = ""
+description = "CSS styling tips and tricks"
 
 # The date of the post.
 # 2 formats are allowed: YYYY-MM-DD (2012-10-02) and RFC3339 (2002-10-02T15:00:00Z)
@@ -49,7 +49,6 @@ template = "page.html"
 [extra]
 +++
 
-- when creating a nav bar use the <a> element to as your links instead of <li> which only causes headaches. Only use <li> when you actually want to create a list. I think using it as part of a nav bar is a relic of past css. I found misleading information about how to create a navbar using <li> in an <ul> element.  
+- when creating a nav bar use the **&lt;a&gt;** element to as your links instead of **&lt;li&gt;** which only causes headaches. Only use **&lt;li&gt;** when you actually want to create a list. I think using it as part of a nav bar is a relic of past css. I found misleading information about how to create a navbar using **&lt;li&gt;** in an **&lt;ul&gt;** element.  
 
-- you can wrap an <a> tag with any other element for example an h1 in order to make the wrapping
-element a link. 
+- you can wrap an **&lt;a&gt;** tag with any other element for example an h1 in order to make the wrapping element a link. 

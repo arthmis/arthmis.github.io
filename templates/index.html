@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/brands.css">
   <link rel="stylesheet" href="css/fontawesome.css">
-  <!-- <link rel="stylesheet" href="icons/all.css"> -->
 </head>
 
 <body>
@@ -20,10 +19,13 @@
     </nav>
   </header>
   <div id="content">
-    <article>
-      <h2 class="article-title"><a href="css-styling/index.html">Deploying a personal blog site for viewing everything I want to see</a></h2>
-      <p>Hello World!</p>
-    </article>
+    {% for page in section.pages %}
+      <article>
+        <h2 class="article-title"><a href="{{ page.permalink }}">{{ page.title }}</a></h2>
+        <!-- <span class="post-date">{{ page.date | date(format="%Y-%m-%d") }}</span> -->
+        <p>{{ page.description| safe }}</p>
+      </article>
+    {% endfor %}
   </div>
 
 <body>
