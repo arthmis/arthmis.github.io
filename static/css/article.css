@@ -1,76 +1,102 @@
-@font-face {
-    font-family: "Source Sans Pro";
-    src: url("../webfonts/SourceSansPro-Regular.ttf") format("truetype");
-}
-
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     background: white;
-    font-size: 16px;
-    font-family: "Source Sans Pro", sans-serif;
+    font-size: 18px;
+    /* font-family: "Open sans", sans-serif;
+    font-family: "Merriweather", serif; */
 
 }
-header {
-    height: 8%;
+
+
+h1, h2, a {
+    font-family: "Open sans", sans-serif;
 }
+
+p {
+    font-family: "Merriweather", serif;
+}
+
+header {
+    height: 4em;
+}
+
 nav {
-    height: 8%;
+    height: 4em;
     width: 100%;
     box-shadow: 5px 4px 10px #dddddd;
     display: flex;
     width: 100%;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     position: fixed;
     top: 0;
     background-color: rgba(255, 255, 255, 0.95);
 }
 
-#nav-ul > div {
-    display: flex;
-    /* height: 100%; */
-    width: 100%;
-    max-width: 80em;
-    position: fixed;
-    justify-content: space-between;
-    align-items: center;
+#nav-ul div {
+    height: 100%;
 }
 
-#nav-ul > div > h1 {
+/* #nav-ul div h1 {
     padding-left: 1em;
+} */
+
+#personal-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 1em;
+}
+
+#personal-links a {
+    padding-right: 1em;
 }
 
 #home {
-    font-size: 0.8em;
+    padding-left: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+#home h1 {
+    font-size: 1em;
+    font-weight: normal;
+}
+
+.menu-links {
+    font-size: 1em;
     text-decoration: none;
+    color: rgb(218, 129, 56);
 }
 
-#home > a:link, a:visited {
-    color: rgba(87, 177, 255, 255);
+.menu-links:link, .menu-links:visited {
+    color: rgb(218, 129, 56);
 }
 
-#github {
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 1.5em;
     padding-right: 1.5em;
-    text-decoration: none;
-    font-size: 1.1em;
 }
 
 #content {
     display: flex;
-    max-width: 70em;
+    max-width: 80ch;
+    min-width: 30ch;
+    width: 85%;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
-    line-height: 1.5;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    align-self: center;
 }
 
 article {
-    width: 80%;
+    width: 100%;
     text-align: left;
     margin-bottom: 1em;
 }
@@ -79,8 +105,9 @@ article > h2 {
     font-size: 1.3em;
 }
 
-article > p {
-    font-size: 1em;
+article p {
+    font-size: 1.1em;
+    line-height: 1.5em;
 }
 
 .article-title {

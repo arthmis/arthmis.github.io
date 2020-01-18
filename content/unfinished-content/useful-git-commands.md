@@ -1,5 +1,5 @@
 +++
-title = "Histogram Specification"
+title = "Useful Git Commands"
 description = ""
 
 # The date of the post.
@@ -49,17 +49,20 @@ template = "page.html"
 [extra]
 +++
 
-# Histogram Specification
+### **Add remote repo**
 
-## Piecewise Linear Histogram Matching
+`git remote add <name> <link to repo>(ends in .git)`
 
-### Steps
+### To delete a branch**
 
-    - make this tutorial like and go through the code and every step for both functions
-    - create cumulative distribution function for original image and reference distribution(passed in parameter)
-    - specify the distribution function as a piecewise linear function(this is provided by the parameter)
-    - turn the distribution into a cumulative distribution function
-    - the values of the piecewise linear cdf is created by the appropriate formula, should you want to do that, though
-    it isn't necessary
-    - look up more information to understand the logic behind piecewise histogram matching(current knowledge incomplete
-    for layman explanation)
+`git branch -d` <branch name>
+
+use `-D` to force deletion even if the branch hasn't been merged upstream
+
+### To delete files in remote that were committed previously but deleted in a future commit
+
+`git rm -r --cached . `
+
+### **Delete single file that has been cached** (future commit)
+
+`git rm --cached <file name>

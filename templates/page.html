@@ -5,25 +5,43 @@
   <meta content="text/html" charset="utf-8" />
   <title>{{ page.title }}</title>
   <link rel="stylesheet" href="../css/article.css">
-  <link rel="stylesheet" href="../css/brands.css">
-  <link rel="stylesheet" href="../css/fontawesome.css">
+  <link rel="stylesheet" href="../css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
   <header>
     <nav id="nav-ul">
-      <div>
-        <h1><a id="home" href="../index.html">Lazy Passion's Blog</a></h1>
-        <a id="github" class="fab fa-github" href="https://github.com/lazypassion" target="_blank"></a>
+      <div id="home">
+        <h1>
+          <a class="menu-links" href="../index.html">
+            Arthmis Blog
+          </a>
+        </h1>
+      </div>
+      <div id="personal-links">
+        <a class="menu-links" id="portfolio" href="" target="_blank"> 
+          <i class="fa fa-space-shuttle" aria-hidden="true"></i>
+          Portfolio
+        </a>
+        <a class="menu-links" id="github" href="https://github.com/arthmis" target="_blank"> 
+          <i class="fa fa-github" aria-hidden="true"></i>
+          Github
+        </a>
       </div>
     </nav>
   </header>
-  <div id="content">
+  <main>
+    <div id="content">
+
     <article>
-      <h2 class="article-title">{{ page.title }}</h2>
+      <h1 class="article-title">{{ page.title }}</h1>
       <p>{{ page.content | safe}}<p>
     </article>
-  </div>
+    </div>
+  </main>
 
 <body>
 <html>
