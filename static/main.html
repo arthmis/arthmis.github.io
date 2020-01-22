@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>Artmis Portfolio</title>
@@ -12,19 +11,21 @@
     </head>
     <body>
         <header>
-            <nav>
-                <a id="home" href="./main.html">ARTMIS</a>
-                <div>
-                    <a class="menu-links" id="blog" href="index.html" target="_blank"> 
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        BLOG
-                    </a>
-                    <a class="menu-links" id="github" href="https://github.com/arthmis" target="_blank"> 
-                        <i class="fa fa-github" aria-hidden="true"></i>
-                        GITHUB
-                    </a>
-                </div>
-            </nav>
+            <div id="nav-wrapper">
+                <nav>
+                    <a id="home" href="./main.html">ARTMIS</a>
+                    <div>
+                        <a class="menu-links" id="blog" href="index.html"> 
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            BLOG
+                        </a>
+                        <a class="menu-links" id="github" href="https://github.com/arthmis" target="_blank"> 
+                            <i class="fa fa-github" aria-hidden="true"></i>
+                            GITHUB
+                        </a>
+                    </div>
+                </nav>
+            </div>
         </header>
         <main>
             <div id="intro-wrapper">
@@ -36,38 +37,76 @@
                     </h1>
                     <p>
                         Looking to become an image processing and computer vision engineer.
-                        I want to work in the cutting edge of autonomous vehicles, 3d reconstruction
-                        and understand the details of imaging in general. 
+                        I want to work in the fields of autonomous vehicles and 3d reconstruction
+                        while gaining understanding of imaging applications. I'm starting my journey by implementing
+                        image processing algorithms and experimenting with OpenCV.
                     </p>
                 </div>
             </div>
             <div id="projects"> 
                 <h2>Projects</h2>
-                <div id="project-wrapper">
-                    <div class="project">
-                        <img src="images/image-processing-website.png" alt="image processing website">
-                        <a class="project-links" href="www.imagproc.com">
-                            <div>
-                                Image Processing Website
-                            </div>
-                        </a>
+                <div id="projects-wrapper">
+                    <div class="project-flex-wrapper">
+                        <div class="project">
+                            <img src="images/image-processing-website.png" alt="image processing website">
+                            <a class="project-links" href="https://www.imagproc.com/">
+                                <div>
+                                    Image Processing Website
+                                </div>
+                            </a>
+
+                        </div>
                     </div>
-                    <div class="project">
-                        <img src="images/airbnb-scraper.png" alt="airbnb scraper">
-                        <a class="project-links" href="www.https://github.com/arthmis/airbnb-scraper.com">
-                            <div>
-                                Airbnb Scraper Source
-                            </div>
-                        </a>
+                    <div class="project-flex-wrapper">
+                        <div class="project">
+                            <img src="images/airbnb-scraper.png" alt="airbnb scraper">
+                            <a class="project-links" href="www.https://github.com/arthmis/airbnb-scraper.com">
+                                <div>
+                                    Airbnb Scraper
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-flex-wrapper">
+                        <div class="project">
+                            <img src="images/credit-card-recommender.jpg" alt="credit card recommender landing page">
+                            <a class="project-links" href="https://github.com/arthmis/CC-recommender-frontend">
+                                <div>
+                                    Credit Card Recommender
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 
             </div>
-
         </main>
         <footer>
             <div>
-                Avatar icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                <div id="navigation">
+                    <ul>Navigate
+                        <li>
+                            <a href="./main.html">
+                            <i class="fa fa-space-shuttle" aria-hidden="true"></i>
+                            Portfolio</a>
+                        </li>
+                        <li>
+                            <a href="./index.html">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                Blog</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/arthmis">
+                                <i class="fa fa-github" aria-hidden="true"></i>
+                                Github</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="attributions">
+                    <p>
+                        Avatar icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                    </p>
+                </div>
             </div>
         </footer>
     </body>

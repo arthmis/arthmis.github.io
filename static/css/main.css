@@ -2,14 +2,35 @@ html, body {
     width: 100%;
     padding: 0;
     margin: 0;
-    font-size: 17px;
+    font-size: 16px;
     font-family: "Open sans", sans-serif;
 }
 
+a {
+    color: #f84437;
+}
+a:visited {
+    color: #64120c;
+}
+a:hover {
+    color: #cf0e00;
+}
+
 header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 4em;
-    position: fixed;
     width: 100%;
+    position: fixed;
+}
+
+#nav-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }
 
 nav {
@@ -35,13 +56,16 @@ nav div {
     color: inherit;
 }
 
+.menu-links:visited {
+    color: white;
+}
+.menu-links:hover {
+    color: #790000;
+}
 .menu-links {
     text-decoration: none;
     padding-right: 2em;
-    color: inherit;
-}
-.menu-links:hover {
-    color: #7e7e7e;
+    color: white;
 }
 
 main {
@@ -56,7 +80,7 @@ main {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #ee6f6f;
     color: white;
 }
@@ -64,15 +88,13 @@ main {
 #intro {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
-    margin-top: 20%;
     min-width: 25ch;
     max-width: 80ch;
     width: 100%;
-    height: 80vh;
-    padding-left: 2em;
-    padding-right: 2em;
+    min-height: 50vh;
+    padding-left: 0.9em;
+    padding-right: 0.9em;
 }
 
 #avatar {
@@ -81,44 +103,23 @@ main {
     align-items: center;
     width: 10em;
     height: 10em;
-    /* min-width: 10em;
-    max-width: 15em;
-    width: 100%;
-    min-height: 10em;
-    max-height: 15em;
-    height: 100%; */
     border-radius: 50%;
     background-color: white;
     background-image: url(../images/player.svg);
     background-size: cover;
 }
-/* #avatar img {
-    max-width: 10em;
-    min-width: 3em;
-    width: 100%;
-    height: auto;
-} */
 
 #projects {
-    height: 100vh;
-    /* background-color: #eeeeee; */
+    min-height: 50vh;
+    padding-bottom: 2em;
 }
 
 #projects > h2 {
     padding-left: 3em;
 }
-#project-wrapper {
-    /* width: 100%; */
-    display: flex;
-    justify-content: space-around;
-    padding-left: 2em;
-    padding-right: 2em;
 
-}
 .project > a {
-    /* display: block; */
     text-decoration: none;
-    border: #7e7e7e 1px solid;
 }
 .project > a > div {
     display: flex;
@@ -127,6 +128,20 @@ main {
     height: 3em;
     width: 100%;
 
+}
+
+
+.project > img {
+    width: 100%;
+    height: auto;
+}
+
+#projects-wrapper {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(25em, 1fr));
+    grid-gap: 1em;
 }
 
 .project {
@@ -138,22 +153,176 @@ main {
     min-height: 10em;
     max-height: 25em;
     height: 100%;
-    box-shadow: 1px 4px 7px -1px rgb(179, 179, 179);
+    box-shadow: 1px 3px 7px -1px rgb(179, 179, 179);
 }
-
-.project > img {
+.project-flex-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    height: auto;
-}
-
-.project-links {
-    color: #508ff5;
-}
-.project-links:hover {
-    background-color: #bfdcf3;
+    height: 100%;
 }
 
 footer {
-    background-color: #695f5f;
-    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 10em;
+    background-color: #91c2c8;
+}
+footer > div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    padding-bottom: 1em;
+    width: 100%;
+}
+#navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: 90%;
+    margin-top: 1em;
+}
+
+#navigation > ul > li {
+    list-style-type: none;
+    margin-top: 1em;
+}
+#navigation > ul > li > a {
+    text-decoration: none;
+    color: #f84437;
+}
+
+#attributions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 50%;
+    height: 90%;
+    margin-top: 1em;
+}
+#attributions > p > a {
+    text-decoration: none;
+}
+
+@media all and (max-width: 700px) {
+    nav {
+        font-size: 0.8em;
+    }
+
+    #avatar {
+        margin-top: 4em;
+        width: 8em;
+        height: 8em;
+    }
+
+    #projects {
+        display: flex;
+        flex-direction: column;
+
+    }
+    #projects > h2 {
+        padding: 0;
+        align-self: center;
+    }
+
+    #projects-wrapper {
+        height: 100%;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(13em, 1fr));
+        grid-gap: 1em;
+    }
+
+    .project {
+        display: flex;
+        flex-direction: column;
+        min-width: 10em;
+        max-width: 20em;
+        width: 90%;
+        min-height: 10em;
+        max-height: 20em;
+        height: 100%;
+    }
+    .project-flex-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    footer > div {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: white;
+        padding-bottom: 1em;
+        width: 100%;
+    }
+    #navigation {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 1em;
+    }
+
+    #attributions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 1em;
+    }
+    #attributions > p {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+}
+
+@media all and (min-width: 1100px) {
+    footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    footer > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 75%;
+    }
+
+    #nav-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 75%;
+        height: 100%;
+    }
+    #projects {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 50vh;
+        padding-bottom: 2em;
+    }
+    #projects > h2 {
+        align-self: flex-start;
+        margin-left: 4em;
+    }
+    #projects-wrapper {
+        width: 80%;
+    }
+    
 }
