@@ -1,62 +1,76 @@
 html, body {
-    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
     background: white;
-    font-size: 18px;
-    /* font-family: "Open sans", sans-serif;
-    font-family: "Merriweather", serif; */
-
+    font-size: 17px;
+    color: #242424;
 }
 
-
-h1, h2, a {
+h1, h2, h3 {
     font-family: "Open sans", sans-serif;
+    color: #646464;
+}
+h3 {
+    font-size: 1.3em;
+}
+h2 {
+    font-size: 1.5em;
 }
 
 p {
     font-family: "Merriweather", serif;
 }
 
+a:visited {
+    color: #00718d;
+}
+a:hover {
+    color: #00add8;
+}
+a {
+    color: #49c2e0;
+    text-decoration: none;
+}
+
+pre {
+    overflow-x: auto;
+}
+
 header {
     height: 4em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 nav {
     height: 4em;
+    /* width: 100%; */
+    max-width: 100ch;
+    min-width: 30ch;
     width: 100%;
-    box-shadow: 5px 4px 10px #dddddd;
     display: flex;
-    width: 100%;
     align-items: center;
     justify-content: space-between;
-    position: fixed;
-    top: 0;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgb(255, 255, 255);
+    padding-left: 1.5em;
+    padding-right: 1.5em;
 }
-
-#nav-ul div {
-    height: 100%;
-}
-
-/* #nav-ul div h1 {
-    padding-left: 1em;
-} */
 
 #personal-links {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    padding-right: 1em;
 }
 
-#personal-links a {
+#portfolio {
     padding-right: 1em;
 }
 
 #home {
-    padding-left: 1em;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -69,11 +83,15 @@ nav {
 .menu-links {
     font-size: 1em;
     text-decoration: none;
-    color: rgb(218, 129, 56);
+    color: rgb(238, 92, 87);
+    font-family: "Open sans", sans-serif;
 }
 
 .menu-links:link, .menu-links:visited {
-    color: rgb(218, 129, 56);
+    color: rgb(218, 61, 56);
+}
+.menu-links:hover {
+    color: rgb(184, 6, 0);
 }
 
 main {
@@ -86,13 +104,13 @@ main {
 
 #content {
     display: flex;
-    max-width: 80ch;
+    max-width: 100ch;
     min-width: 30ch;
-    width: 85%;
+    width: 100%;
     flex-direction: column;
-    /* align-items: center; */
     justify-content: center;
     align-self: center;
+    border-top: 1px solid #cecece;
 }
 
 article {
@@ -111,5 +129,11 @@ article p {
 }
 
 .article-title {
-    color: rgba(87, 177, 255, 255);
+    font-size: 1.7em;
+}
+
+@media all and (max-width: 650px) {
+    body {
+        font-size: 15px;
+    }
 }

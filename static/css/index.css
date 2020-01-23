@@ -1,13 +1,24 @@
 html, body {
-    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
     background: white;
-    font-size: 16px;
+    font-size: 17px;
 }
 
 h1, h2, a {
     font-family: "Open sans", sans-serif;
+}
+
+a:visited {
+    color: #00718d;
+}
+a:hover {
+    color: #00add8;
+}
+a {
+    color: #49c2e0;
+    text-decoration: none;
 }
 
 p {
@@ -16,43 +27,37 @@ p {
 
 header {
     height: 4em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 nav {
     height: 4em;
-    width: 100%;
-    box-shadow: 5px 4px 10px #dddddd;
     display: flex;
+    min-width: 30ch;
+    max-width: 100ch;
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    position: fixed;
-    top: 0;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: #ffffff;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
 }
-
-#nav-ul div {
-    height: 100%;
-}
-
-/* #nav-ul div h1 {
-    padding-left: 1em;
-} */
 
 #personal-links {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    padding-right: 1em;
 }
 
-#personal-links a {
+#portfolio {
     padding-right: 1em;
 }
 
 #home {
-    padding-left: 1em;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -65,13 +70,16 @@ nav {
 .menu-links {
     font-size: 1em;
     text-decoration: none;
-    color: rgb(218, 129, 56);
+    color: rgb(238, 92, 87);
 }
 
 .menu-links:link, .menu-links:visited {
-    color: rgb(218, 129, 56);
+    color: rgb(218, 61, 56);
 }
 
+.menu-links:hover {
+    color: rgb(184, 6, 0);
+}
 
 main {
     display: flex;
@@ -90,6 +98,7 @@ main {
     align-items: center;
     justify-content: center;
     align-self: center;
+    border-top: 1px solid #dddddd;
 }
 
 article {
@@ -107,22 +116,6 @@ article p {
     font-size: 20px;
     line-height: 1.5em;
 }
-
-.article-title a:link {
-    color: rgb(218, 120, 81);
-}
-
-.article-title a:visited {
-    color: rgb(165, 60, 0);
-}
-
-.article-title:hover {
-    cursor: pointer;
-}
-
-.article-title:hover a {
-    color: rgb(241, 152, 101);
-}    
 
 .post-date {
     font-size: 1em;
