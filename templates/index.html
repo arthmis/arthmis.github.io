@@ -1,49 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <title>Arthmis Blog</title>
-  <meta content="text/html" charset="utf-8" http-equiv="Content-Type"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5"/>
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"> 
-  <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
-</head>
-
-<body>
-  <header>
-    <nav>
-      <div id="home">
-        <h1>
-          <a class="menu-links" href="./">
-            Arthmis Blog
-          </a>
-        </h1>
-      </div>
-      <div id="personal-links">
-        <a class="menu-links" id="portfolio" href="./portfolio"> 
-          <i class="fa fa-space-shuttle" aria-hidden="true"></i>
-          Portfolio
-        </a>
-        <a class="menu-links" id="github" href="https://github.com/arthmis" target="_blank"> 
-          <i class="fa fa-github" aria-hidden="true"></i>
-          Github
-        </a>
-      </div>
-    </nav>
-  </header>
-  <main>
-    <div id="content">
-      {% for page in section.pages %}
-        <article>
-          <h2 class="article-title"><a href="{{ page.permalink }}">{{ page.title }}</a></h2>
-          <span class="post-date">{{ page.date | date(format="%Y-%m-%d") }}</span>
-          <p>{{ page.description| safe }}</p>
-        </article>
-      {% endfor %}
-    </div>
-  </main>
-
-<body>
 <html>
+    <head>
+        <title>Arthmis Portfolio</title>
+        <meta content="text/html" charset="utf-8" http-equiv="Content-Type"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5"/>
+        <link rel="stylesheet" href="/css/portfolio.css">
+        <link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a id="home" href="/">ARTMIS</a>
+                <div>
+                    <a class="menu-links" id="blog" href="/blog/"> 
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        BLOG
+                    </a>
+                    <a class="menu-links" id="github" href="https://github.com/arthmis" target="_self"> 
+                        <i class="fa fa-github" aria-hidden="true"></i>
+                        GITHUB
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div id="intro-wrapper">
+                <div id="intro">
+                    <div id="avatar"></div>
+                    <h1>
+                        Artmis
+                    </h1>
+                    <p>
+                        Looking to become an image processing and computer vision engineer.
+                        I want to work in the fields of autonomous vehicles and 3d reconstruction
+                        while gaining understanding of imaging applications. I'm starting my journey by implementing
+                        image processing algorithms and experimenting with OpenCV.
+                    </p>
+                </div>
+            </div>
+            <div id="projects"> 
+                <h2>Projects</h2>
+                <div id="projects-wrapper">
+                    <div class="project-flex-wrapper">
+                        <div class="project">
+                            <img src="../images/image-processing-website.png" alt="image processing website">
+                            <a class="project-links" href="https://www.imagproc.com/" target="_self">
+                                <div>
+                                    Image Processing Website
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="project-flex-wrapper">
+                        <div class="project">
+                            <img src="../images/airbnb-scraper.png" alt="airbnb scraper">
+                            <a class="project-links" href="https://github.com/arthmis/airbnb-scraper" target="_self">
+                                <div>
+                                    Airbnb Scraper
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-flex-wrapper">
+                        <div class="project">
+                            <img src="../images/credit-card-recommender.jpg" alt="credit card recommender landing page">
+                            <a class="project-links" href="https://github.com/arthmis/CC-recommender-frontend" target="_self">
+                                <div>
+                                    Credit Card Recommender
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </main>
+        <footer>
+            <div>
+                <div id="navigation">
+                    <ul>Navigate
+                        <li>
+                            <a href="./main.html">
+                            <i class="fa fa-space-shuttle" aria-hidden="true"></i>
+                            Portfolio</a>
+                        </li>
+                        <li>
+                            <a href="./index.html">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                Blog</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/arthmis">
+                                <i class="fa fa-github" aria-hidden="true"></i>
+                                Github</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="attributions">
+                    <p>
+                        Avatar icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
