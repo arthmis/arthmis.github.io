@@ -1,0 +1,139 @@
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: white;
+    font-size: 17px;
+    color: #242424;
+}
+
+h1, h2, h3 {
+    font-family: "Open sans", sans-serif;
+    color: #646464;
+}
+h3 {
+    font-size: 1.3em;
+}
+h2 {
+    font-size: 1.5em;
+}
+
+p {
+    font-family: "Merriweather", serif;
+}
+
+a:visited {
+    color: #00718d;
+}
+a:hover {
+    color: #00add8;
+}
+a {
+    color: #49c2e0;
+    text-decoration: none;
+}
+
+pre {
+    overflow-x: auto;
+}
+
+header {
+    height: 4em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav {
+    height: 4em;
+    /* width: 100%; */
+    max-width: 100ch;
+    min-width: 30ch;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(255, 255, 255);
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+}
+
+#personal-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#portfolio {
+    padding-right: 1em;
+}
+
+#home {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+#home h1 {
+    font-size: 1em;
+    font-weight: normal;
+}
+
+.menu-links {
+    font-size: 1em;
+    text-decoration: none;
+    color: rgb(238, 92, 87);
+    font-family: "Open sans", sans-serif;
+}
+
+.menu-links:link, .menu-links:visited {
+    color: rgb(218, 61, 56);
+}
+.menu-links:hover {
+    color: rgb(184, 6, 0);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+}
+
+#content {
+    display: flex;
+    max-width: 100ch;
+    min-width: 30ch;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    border-top: 1px solid #cecece;
+}
+
+article {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 1em;
+}
+
+article > h2 {
+    font-size: 1.3em;
+}
+
+article p {
+    font-size: 1.1em;
+    line-height: 1.5em;
+}
+
+.article-title {
+    font-size: 1.7em;
+}
+
+@media all and (max-width: 650px) {
+    body {
+        font-size: 15px;
+    }
+}

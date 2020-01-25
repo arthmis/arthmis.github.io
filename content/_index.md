@@ -5,5 +5,5 @@ description = ""
 
 template = "index.html"
 
-<!-- page_template = "page.html" -->
+page_template = "page.html"
 +++

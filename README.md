@@ -15,4 +15,4 @@ from the root of the directory or you can build and start a local server for the
 zola serve
 ```
 
-After serving you can find the website at [`localhost:1111`](localhost:1111) on your web browser which is the default port used. 
+After serving you can find the website at `localhost:1111` on your web browser which is the default port used. 
