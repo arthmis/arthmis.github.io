@@ -1,6 +1,6 @@
 ## This is a personal website and blog 
 
-### Building
+### Building Site
 
 You will need [`zola`](https://www.getzola.org/) to build this project.
 
