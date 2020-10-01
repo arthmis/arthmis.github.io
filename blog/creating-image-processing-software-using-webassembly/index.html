@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/css/article.css">
   <link rel="stylesheet" href="/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"> 
-  <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400&display=swap" rel="stylesheet"> 
 
 </head>
 
@@ -46,7 +46,7 @@
 <p>Since Webassembly is a compilation target for the web, I used Rust to write the actual image processing algorithms. I used Rust over C++ because it probably has the best wasm support. <a href="https://github.com/rustwasm/wasm-bindgen">Wasm-bindgen</a> and <a href="https://github.com/rustwasm/wasm-pack">wasm-pack</a> make javascript, wasm interoperability and compiling to wasm virtually painless, allowing me to write my code without worrying about wasm initialization and javascript binding code. Additionally I wouldn't benefit from using a mature image processing library in C++ because everything will be written from scratch.</p>
 <p>A typical example of calling wasm from javascript went like:</p>
 <pre style="background-color:#212733;">
-<span style="color:#ccc9c2;">
+<code><span style="color:#ccc9c2;">
   </span><span style="color:#ffa759;">function </span><span style="color:#ffd580;">box_blur_image</span><span style="color:#ccc9c2;">(</span><span style="color:#ffcc66;">img</span><span style="color:#ccc9c2cc;">, </span><span style="color:#ffcc66;">width</span><span style="color:#ccc9c2cc;">, </span><span style="color:#ffcc66;">kernel_size</span><span style="color:#ccc9c2;">) {</span><span style="color:#ccc9c2;">
 </span><span style="color:#ccc9c2;">
     </span><span style="font-style:italic;color:#5c6773;">// box blur is the wasm function</span><span style="font-style:italic;color:#5c6773;">
@@ -61,13 +61,13 @@
     </span><span style="color:#ffa759;">return </span><span style="color:#ccc9c2;">box_blur_raw_data</span><span style="color:#ccc9c2cc;">;</span><span style="color:#ccc9c2;">
   }</span><span style="color:#ccc9c2;">
 </span><span style="color:#ccc9c2;">
-</span></pre>
+</span></code></pre>
 <p>In order to compile rust to wasm I used wasm-bindgen macros allowing wasm-bindgen to create javascript bindings to wasm. They will act as the interop for the javascript used in the UI. Example rust code looks like:</p>
 <pre style="background-color:#212733;">
-<span style="color:#ccc9c2;">
+<code><span style="color:#ccc9c2;">
   </span><span style="font-style:italic;color:#5c6773;">// the function javascript calls to perform box blur on an image</span><span style="color:#ccc9c2;">
   </span><span style="color:#ccc9c2cc;">#</span><span style="color:#ccc9c2;">[</span><span style="color:#ffd580;">wasm_bindgen</span><span style="color:#ccc9c2;">]</span><span style="color:#ccc9c2;">
-  </span><span style="color:#ffa759;">pub fn </span><span style="color:#ffd580;">box_blur</span><span style="color:#ccc9c2;">(</span><span style="color:#ffcc66;">input_image</span><span style="color:#ccc9c2cc;">: </span><span style="color:#ccc9c2;">Vec&lt;</span><span style="color:#ffa759;">u8</span><span style="color:#ccc9c2;">&gt;, </span><span style="color:#ffcc66;">width</span><span style="color:#ccc9c2cc;">: </span><span style="color:#ffa759;">u32</span><span style="color:#ccc9c2;">, </span><span style="color:#ffcc66;">kernel_size</span><span style="color:#ccc9c2cc;">: </span><span style="color:#ffa759;">u32</span><span style="color:#ccc9c2;">) </span><span style="color:#ccc9c2cc;">-&gt; </span><span style="color:#ccc9c2;">Vec&lt;</span><span style="color:#ffa759;">u8</span><span style="color:#ccc9c2;">&gt; {</span><span style="color:#ccc9c2;">
+  </span><span style="color:#ffa759;">pub fn </span><span style="color:#ffd580;">box_blur</span><span style="color:#ccc9c2;">(</span><span style="color:#ffcc66;">input_image</span><span style="color:#ccc9c2cc;">: </span><span style="font-style:italic;color:#5ccfe6;">Vec</span><span style="color:#ccc9c2;">&lt;</span><span style="color:#ffa759;">u8</span><span style="color:#ccc9c2;">&gt;, </span><span style="color:#ffcc66;">width</span><span style="color:#ccc9c2cc;">: </span><span style="color:#ffa759;">u32</span><span style="color:#ccc9c2;">, </span><span style="color:#ffcc66;">kernel_size</span><span style="color:#ccc9c2cc;">: </span><span style="color:#ffa759;">u32</span><span style="color:#ccc9c2;">) </span><span style="color:#ccc9c2cc;">-&gt; </span><span style="font-style:italic;color:#5ccfe6;">Vec</span><span style="color:#ccc9c2;">&lt;</span><span style="color:#ffa759;">u8</span><span style="color:#ccc9c2;">&gt; {</span><span style="color:#ccc9c2;">
       </span><span style="color:#ffa759;">let</span><span style="color:#ccc9c2;"> height </span><span style="color:#f29e74;">= </span><span style="color:#ccc9c2;">(input_image</span><span style="color:#f29e74;">.</span><span style="color:#f28779;">len</span><span style="color:#ccc9c2;">() </span><span style="color:#f29e74;">as </span><span style="color:#ffa759;">u32 </span><span style="color:#f29e74;">/ </span><span style="color:#ffcc66;">CHANNEL_COUNT</span><span style="color:#ccc9c2;">) </span><span style="color:#f29e74;">/</span><span style="color:#ccc9c2;"> width</span><span style="color:#ccc9c2cc;">;</span><span style="color:#ccc9c2;">
       </span><span style="color:#ffa759;">let mut</span><span style="color:#ccc9c2;"> image</span><span style="color:#ccc9c2cc;">:</span><span style="color:#ccc9c2;"> RgbaImage </span><span style="color:#f29e74;">=</span><span style="color:#ccc9c2;">
           image</span><span style="color:#f29e74;">::</span><span style="color:#ccc9c2;">ImageBuffer</span><span style="color:#f29e74;">::</span><span style="color:#ccc9c2;">from_vec(width</span><span style="color:#ccc9c2cc;">,</span><span style="color:#ccc9c2;"> height</span><span style="color:#ccc9c2cc;">,</span><span style="color:#ccc9c2;"> input_image)</span><span style="color:#ccc9c2;">
@@ -79,7 +79,7 @@
       image</span><span style="color:#f29e74;">.</span><span style="color:#f28779;">into_vec</span><span style="color:#ccc9c2;">()</span><span style="color:#ccc9c2;">
   }</span><span style="color:#ccc9c2;">
 </span><span style="color:#ccc9c2;">
-</span></pre><h2 id="performance-considerations">Performance Considerations</h2>
+</span></code></pre><h2 id="performance-considerations">Performance Considerations</h2>
 <p>For this project performance was very important. It is one of the reasons wasm was chosen over javascript. Wasm is generally faster, has a higher performance ceiling, and has more consistent performance than javascript.</p>
 <p>I quickly discovered that executing wasm on the main thread would be detrimental to the responsiveness of the website. It would probably be fine on a fast desktop class machine, however, on a mobile phone it would lead to a terrible user experience. The reason performance wasn't good enough was because if anything takes long to execute on the main thread then the browser was blocked from updating the UI, causing perceptible lag. </p>
 <p>Ideal web performance requires that screen updates every 16ms for 60 fps(frames per second). Of those 16ms, some are used for the browser's rendering logic which means my code has to execute in under 10ms as stated by the <a href="https://developers.google.com/web/fundamentals/performance/rail">RAIL guidelines</a>. One operation, Box Blur, takes over 100ms to execute for an RGB image of dimensions 1400 by 900 on desktop machines.</p>
@@ -89,7 +89,7 @@
 <h2 id="algorithms">Algorithms</h2>
 <p>For the sake of releasing the project in a reasonable time, I decided to start with only four basic algorithms, inversion, box blur, gamma corrections, and sobel edge detector. Inversion was simple to implement; it is the pixel value subtracted from the max possible value for a pixel. </p>
 <pre style="background-color:#212733;">
-<span style="color:#ccc9c2;">
+<code><span style="color:#ccc9c2;">
   </span><span style="color:#ffa759;">fn </span><span style="color:#ffd580;">invert_mut</span><span style="color:#ccc9c2;">(</span><span style="color:#ffcc66;">image</span><span style="color:#ccc9c2cc;">: </span><span style="color:#f29e74;">&amp;</span><span style="color:#ffa759;">mut</span><span style="color:#ccc9c2;"> RgbaImage) {</span><span style="color:#ccc9c2;">
       </span><span style="color:#ffa759;">let</span><span style="color:#ccc9c2;"> max </span><span style="color:#f29e74;">= </span><span style="color:#ccc9c2;">std</span><span style="color:#f29e74;">::</span><span style="color:#ccc9c2;">u8</span><span style="color:#f29e74;">::</span><span style="color:#ffcc66;">MAX</span><span style="color:#ccc9c2cc;">;</span><span style="color:#ccc9c2;">
       </span><span style="color:#ffa759;">for</span><span style="color:#ccc9c2;"> pixel </span><span style="color:#f29e74;">in</span><span style="color:#ccc9c2;"> image</span><span style="color:#f29e74;">.</span><span style="color:#f28779;">pixels_mut</span><span style="color:#ccc9c2;">() {</span><span style="color:#ccc9c2;">
@@ -99,10 +99,10 @@
       }</span><span style="color:#ccc9c2;">
   }</span><span style="color:#ccc9c2;">
 </span><span style="color:#ccc9c2;">
-</span></pre><h3 id="gamma">Gamma</h3>
+</span></code></pre><h3 id="gamma">Gamma</h3>
 <p>Gamma correction used a <a href="https://en.wikipedia.org/wiki/Lookup_table">Lookup Table</a> because the calculations use floating point arithmetic which can be slow when done millions of times. Using the LUT, I only have to calculate the new pixel value for each 256 possible values, because it's an 8 bit image, and then apply them as I loop through the image. </p>
 <pre style="background-color:#212733;">
-<span style="color:#ccc9c2;">
+<code><span style="color:#ccc9c2;">
     </span><span style="font-style:italic;color:#5c6773;">// power law transform is the general name of gamma correction</span><span style="color:#ccc9c2;">
   </span><span style="color:#ffa759;">fn </span><span style="color:#ffd580;">power_law_transform_mut</span><span style="color:#ccc9c2;">(</span><span style="color:#ffcc66;">image</span><span style="color:#ccc9c2cc;">: </span><span style="color:#f29e74;">&amp;</span><span style="color:#ffa759;">mut</span><span style="color:#ccc9c2;"> RgbaImage, </span><span style="color:#ffcc66;">gamma</span><span style="color:#ccc9c2cc;">: </span><span style="color:#ffa759;">f32</span><span style="color:#ccc9c2;">) {</span><span style="color:#ccc9c2;">
       </span><span style="color:#ffa759;">let</span><span style="color:#ccc9c2;"> lut </span><span style="color:#f29e74;">= </span><span style="color:#ccc9c2;">{</span><span style="color:#ccc9c2;">
@@ -121,12 +121,12 @@
       }</span><span style="color:#ccc9c2;">
   }</span><span style="color:#ccc9c2;">
 </span><span style="color:#ccc9c2;">
-</span></pre><h3 id="box-blur">Box Blur</h3>
+</span></code></pre><h3 id="box-blur">Box Blur</h3>
 <p>Box blur required more research to make it performant in a single threaded application without access to SIMD, multithreading or GPGPU. Because box blur is a convolution filter, it can become quickly expensive to convolve the filter with the image. </p>
 <p>For example, if you had a <code>1000 x 1000</code> RGBA image and <code>3 x 3</code> box filter, you would perform 27 million additions and 3 million divisions. That isn't bad, but if that filter was <code>51 x 51</code> then there would be approximately 7.8 billion additions and the same 3 million divisions.  That is approximately 289 times slower to perform than a <code>3 x 3</code> box filter. </p>
 <p>Box filter convolution can be optimized by using the fact it is a <a href="https://en.wikipedia.org/wiki/Separable_filter">separable convolution</a> filter. Essentially the filter is broken into two smaller filters that, when multiplied together, recreate the original filter. </p>
 <pre style="background-color:#212733;">
-<span style="color:#ccc9c2;">
+<code><span style="color:#ccc9c2;">
     </span><span style="font-style:italic;color:#5c6773;">// example of 3x3 box filter</span><span style="color:#ccc9c2;">
     </span><span style="font-style:italic;color:#5c6773;">// when convolving you have to divide by the size</span><span style="color:#ccc9c2;">
     </span><span style="font-style:italic;color:#5c6773;">// of the kernel, since box blur takes the average</span><span style="color:#ccc9c2;">
@@ -149,13 +149,13 @@
       </span><span style="color:#ffcc66;">1</span><span style="color:#ccc9c2cc;">,</span><span style="color:#ccc9c2;">
   ]</span><span style="color:#ccc9c2cc;">; </span><span style="font-style:italic;color:#5c6773;">// * 1 / 3</span><span style="color:#ccc9c2;">
 </span><span style="color:#ccc9c2;">
-</span></pre>
+</span></code></pre>
 <p>While separability improves performance significantly, it doesn't fix the issue of increasingly larger kernels. If you tried the box filter on the website, you would see that the larger filter sizes don't feel any slower than the smaller sizes. That performance increase was achieved by using an optimization that used running sums to calculate the convolution value. This mitigated the costs of blurring with larger and larger kernels. This is the <a href="https://fgiesen.wordpress.com/2012/07/30/fast-blurs-1/">implementation</a> I followed.</p>
 <p>The trade off for this improved version is that while the larger filters are enormously faster, the smaller filters aren't as fast as the regular separable versions. I will do further benchmarking, in the future, to determine at which filter size the running sums implementation becomes faster. </p>
 <h3 id="sobel-edge-detector">Sobel Edge Detector</h3>
 <p>Sobel Edge Detector isn't nearly as expensive to calculate as the larger box filters and fortunately doesn't increase in size. The Sobel operator is the combination of two convolution filters. It uses one filter to find the vertical edges of the image and the second filter finds the horizontal edges. </p>
 <pre style="background-color:#212733;">
-<span style="color:#ccc9c2;">
+<code><span style="color:#ccc9c2;">
     </span><span style="font-style:italic;color:#5c6773;">// finds horizontal edges</span><span style="color:#ccc9c2;">
   </span><span style="color:#ffa759;">let</span><span style="color:#ccc9c2;"> sobel_x </span><span style="color:#f29e74;">= </span><span style="color:#ccc9c2;">[</span><span style="color:#ccc9c2;">
     </span><span style="color:#f29e74;">-</span><span style="color:#ffcc66;">1</span><span style="color:#ccc9c2cc;">, </span><span style="color:#ffcc66;">0</span><span style="color:#ccc9c2cc;">, </span><span style="color:#ffcc66;">1</span><span style="color:#ccc9c2cc;">,</span><span style="color:#ccc9c2;">
@@ -170,10 +170,10 @@
     </span><span style="color:#ffcc66;">1</span><span style="color:#ccc9c2cc;">,  </span><span style="color:#ffcc66;">2</span><span style="color:#ccc9c2cc;">,  </span><span style="color:#ffcc66;">1</span><span style="color:#ccc9c2cc;">,</span><span style="color:#ccc9c2;">
   ]</span><span style="color:#ccc9c2cc;">;</span><span style="color:#ccc9c2;">
 </span><span style="color:#ccc9c2;">
-</span></pre>
+</span></code></pre>
 <p>The edges found are combined to create the final image that displays all the potential edges. </p>
 <pre style="background-color:#212733;">
-<span style="color:#ccc9c2;">
+<code><span style="color:#ccc9c2;">
   </span><span style="color:#ffa759;">for </span><span style="color:#ccc9c2;">(final_pixel</span><span style="color:#ccc9c2cc;">, </span><span style="color:#ccc9c2;">(horizontal_edge</span><span style="color:#ccc9c2cc;">,</span><span style="color:#ccc9c2;"> vertical_edge)) </span><span style="color:#f29e74;">in</span><span style="color:#ccc9c2;"> image</span><span style="color:#f29e74;">.</span><span style="color:#f28779;">pixels</span><span style="color:#ccc9c2;">()</span><span style="color:#ccc9c2;">
     </span><span style="color:#f29e74;">.</span><span style="color:#f28779;">zip</span><span style="color:#ccc9c2;">(horizontal_edges</span><span style="color:#f29e74;">.</span><span style="color:#f28779;">pixels</span><span style="color:#ccc9c2;">())</span><span style="color:#ccc9c2;">
     </span><span style="color:#f29e74;">.</span><span style="color:#f28779;">zip</span><span style="color:#ccc9c2;">(vertical_edges</span><span style="color:#f29e74;">.</span><span style="color:#f28779;">pixels_mut</span><span style="color:#ccc9c2;">()) {</span><span style="color:#ccc9c2;">
@@ -183,7 +183,7 @@
 </span><span style="color:#ccc9c2;">
   }</span><span style="color:#ccc9c2;">
 </span><span style="color:#ccc9c2;">
-</span></pre>
+</span></code></pre>
 <p>Finally, a threshold is applied to the image which is used to decide which edges are considered strong enough for the final output. A strong edge is an area that had a large brightness difference between two regions of the image. Thresholding also helps with eliminating image noise which would otherwise show up as 'edges'. </p>
 <h2 id="future-features">Future Features</h2>
 <p>I'll be adding more image processing algorithms and some data structures like histograms, unsharp mask, gaussian blur, hough transform and waveforms. Performance will have to be greatly improved for lower powered devices. Currently I can probably test for the resolution of mobile devices and determine a more optimal size for the image preview used for display. The current preview image uses a 1.5 megapixel image downsized from the users original image. Even such a small image is unnecessarily large for small mobile phones. </p>
