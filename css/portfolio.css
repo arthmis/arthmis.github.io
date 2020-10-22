@@ -111,16 +111,6 @@ main {
     padding-left: 3em;
 }
 
-.project-links {
-    text-decoration: none;
-}
-.project-links > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 3em;
-    width: 100%;
-}
 
 .project > img {
     width: 100%;
@@ -154,30 +144,33 @@ main {
     height: 100%;
 }
 
-.project-link-github {
+.project-links {
     display: flex;
     flex-direction: row;
     width: 100%;
     align-items: center;
     justify-content: space-between;
 }
-
-#reshipi, 
-#image-processing,
-#airbnb-scraper,
-#credit-card {
+.project-link-name {
     width: 75%;
+    text-decoration: none
 }
 
-#reshipi-github, 
-#image-processing-github, 
-#airbnb-scraper-github, 
-#credit-card-github {
+.project-link-name > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3em;
+    width: 100%;
+}
+
+.project-link-github {
     display: flex;
     justify-content: center;
     width: 25%;
     font-size: 1.6em;
     border-left: solid 1px #cacaca;
+    text-decoration: none;
 }
 
 footer {

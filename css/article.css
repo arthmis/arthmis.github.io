@@ -9,27 +9,34 @@ html, body {
 
 h1, h2, h3 {
     font-family: "Open sans", sans-serif;
-    color: #646464;
+    color: #1f1f1f;
 }
+h1 {
+    font-size: 2.2em;
+}
+
+h2 {
+    font-size: 1.6em;
+    font-weight: 300;
+}
+
 h3 {
     font-size: 1.3em;
 }
-h2 {
-    font-size: 1.5em;
-}
 
 p {
-    font-family: "Merriweather", serif;
+    font-family: "Kumbh Sans", sans-serif;
+    font-size: 1.1em;
 }
 
 a:visited {
-    color: #00718d;
+    color: rgb(218, 61, 56);
 }
 a:hover {
-    color: #00add8;
+    color: rgb(184, 6, 0);
 }
 a {
-    color: #49c2e0;
+    color: rgb(238, 92, 87);
     text-decoration: none;
 }
 
@@ -47,9 +54,8 @@ header {
 
 nav {
     height: 4em;
-    /* width: 100%; */
-    max-width: 100ch;
-    min-width: 30ch;
+    max-width: 80ch;
+    min-width: 25ch;
     width: 100%;
     display: flex;
     align-items: center;
@@ -104,8 +110,8 @@ main {
 
 #content {
     display: flex;
-    max-width: 100ch;
-    min-width: 30ch;
+    max-width: 80ch;
+    min-width: 25ch;
     width: 100%;
     flex-direction: column;
     justify-content: center;
@@ -119,17 +125,12 @@ article {
     margin-bottom: 1em;
 }
 
-article > h2 {
+article > p {
     font-size: 1.3em;
-}
-
-article p {
-    font-size: 1.1em;
-    line-height: 1.5em;
-}
-
-.article-title {
-    font-size: 1.7em;
+    line-height: 30px;
+    font-weight: 300;
+    color: #2f2c2c;
+    /* letter-spacing: 0em; */
 }
 
 @media all and (max-width: 650px) {

@@ -11,18 +11,19 @@ h1, h2, a {
 }
 
 a:visited {
-    color: #00718d;
+    color: rgb(218, 61, 56);
 }
 a:hover {
-    color: #00add8;
+    color: rgb(184, 6, 0);
 }
 a {
-    color: #49c2e0;
+    color: rgb(238, 92, 87);
     text-decoration: none;
 }
 
 p {
-    font-family: "Merriweather", serif;
+    font-family: "Kumbh Sans", sans-serif;
+    font-weight: 300;
 }
 
 header {
@@ -107,14 +108,15 @@ article {
     margin-bottom: 1em;
 }
 
-article h2 a {
+article > h2 > a {
     font-size: 1em;
     text-decoration: none;
 }
 
-article p {
-    font-size: 1em;
+article > p {
+    font-size: 1.2em;
     line-height: 1.5em;
+    color: #222222;
 }
 
 .post-date {
