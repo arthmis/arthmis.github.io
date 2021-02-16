@@ -1,0 +1,326 @@
+html, body {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    font-family: "Open sans", sans-serif;
+}
+
+a {
+    color: #f84437;
+}
+a:visited {
+    color: #64120c;
+}
+a:hover {
+    color: #cf0e00;
+}
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4em;
+    width: 100%;
+    background-color: #ee6f6f;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: #ee6f6f;
+    color: white;
+}
+
+nav div {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: inherit;
+}
+
+#home {
+    text-decoration: none;
+    padding-left: 2em;
+    color: inherit;
+}
+
+
+
+.menu-links:visited {
+    color: white;
+}
+.menu-links:hover {
+    color: #790000;
+}
+.menu-links {
+    text-decoration: none;
+    padding-right: 2em;
+    color: white;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5em;
+}
+#intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 10ch;
+    max-width: 90%;
+    width: 100%;
+    margin-top: 1.5em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+.project-flex-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.project > img {
+    max-width: 100%;
+    height: auto;
+}
+.project > video {
+    max-width: 100%;
+    height: auto;
+}
+
+.project {
+    display: flex;
+    flex-direction: column;
+    min-width: 10em;
+    max-width: 90ch;
+    width: 100%;
+    margin-left: 1em;
+    margin-right: 1em;
+    /* min-height: 10em;
+    max-height: 30em;
+    height: 100%; */
+    /* box-shadow: 1px 3px 7px -1px rgb(179, 179, 179); */
+}
+
+.project-links {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.project-link-name {
+    width: 75%;
+    text-decoration: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 2em;
+    font-size: 1.4em;
+    width: 100%;
+    font-family: "Open sans", sans-serif;
+    margin-bottom: 0;
+}
+
+.project-link-github{
+    display: inline-flex;
+    justify-content: flex-start;
+    width: 100%;
+    font-size: 1.1em;
+    /* border-left: solid 1px #cacaca; */
+    text-decoration: none;
+    margin-bottom: 1em;
+}
+.project-demo {
+    display: inline-flex;
+    justify-content: flex-start;
+    width: 100%;
+    font-size: 1.1em;
+    /* border-left: solid 1px #cacaca; */
+    text-decoration: none;
+}
+
+.project-link-github > a, .project-demo > a{
+    margin-left: 0.5em;
+    word-break: break-all;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 10em;
+    background-color: #91c2c8;
+}
+footer > div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    padding-bottom: 1em;
+    width: 100%;
+}
+#navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: 90%;
+    margin-top: 1em;
+}
+
+#navigation > ul > li {
+    list-style-type: none;
+    margin-top: 1em;
+}
+#navigation > ul > li > a {
+    text-decoration: none;
+    color: #f84437;
+}
+
+#attributions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 50%;
+    height: 90%;
+    margin-top: 1em;
+}
+#attributions > p > a {
+    text-decoration: none;
+}
+
+@media all and (max-width: 700px) {
+    nav {
+        font-size: 0.8em;
+    }
+
+    #intro {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 10ch;
+        max-width: 90%;
+        width: 100%;
+        margin-top: 1.5em;
+        margin-left: 2em;
+        margin-right: 2em;
+    }
+    .project {
+        display: flex;
+        flex-direction: column;
+        min-width: 10em;
+        max-width: 50ch;
+        width: 90%;
+    }
+
+    .project-flex-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    footer > div {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: white;
+        padding-bottom: 1em;
+        width: 100%;
+    }
+    #navigation {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 1em;
+    }
+
+    #attributions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 1em;
+    }
+    #attributions > p {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+}
+
+@media all and (min-width: 1200px) {
+    footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    footer > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 120ch;
+        width: 100%;
+    }
+
+    nav {
+        width: 100%;
+    }
+
+    #intro {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 10ch;
+        max-width: 90ch;
+        width: 100%;
+        margin-top: 1.5em;
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+
+    #projects {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 75vh;
+        padding-bottom: 2em;
+    }
+
+    #projects > h2 {
+        align-self: flex-start;
+        margin-left: 4em;
+    }
+
+    #projects-wrapper {
+        width: 80%;
+        grid-template-columns: repeat(auto-fill, minmax(30em, 1fr));
+    }
+
+    .project {
+        display: flex;
+        flex-direction: column;
+        min-width: 10em;
+        max-width: 150ch;
+        width: 100%;
+    }
+    #intro {
+        font-size: 1.2em;
+    }
+    
+}
