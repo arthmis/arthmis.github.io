@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Deploying First Website on AWS Lightsail</title>
+  <meta content="text/html" charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5"/>
+  <link rel="stylesheet" href="/css/article.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400&display=swap" rel="stylesheet"> 
+
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div id="home">
+        <h1>
+          <a class="menu-links" href="/blog/">
+            Arthmis Blog
+          </a>
+        </h1>
+      </div>
+      <div id="personal-links">
+        <a class="menu-links" id="portfolio" href="/"> 
+          <i class="fa fa-space-shuttle" aria-hidden="true"></i>
+          Portfolio
+        </a>
+        <a class="menu-links" id="github" href="https://github.com/arthmis"> 
+          <i class="fa fa-github" aria-hidden="true"></i>
+          Github
+        </a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div id="content">
+
+      <article>
+        <h1 class="article-title">Deploying First Website on AWS Lightsail</h1>
+          <h2 id="intro-and-motivation">Intro and motivation</h2>
+<p>I wanted to deploy a website where it wasn't a static website. I wanted to write the server side code, build the UI, and handle most of the deployment details from start to finish. I was looking for some basic understanding of how to put a basic web server on the web. This article is a consolidation of all the information I acquired in order to deploy my website, as well as the pitfalls I ran into. I'll assume you already have a website you want to deploy. This article will focus on deploying a website using <a href="https://aws.amazon.com/lightsail/?nc2=type_a">AWS Lightsail</a>.</p>
+<h2 id="setting-up-lightsail">Setting Up Lightsail</h2>
+<p>We will be using AWS Lightsail for managing and deploying our server instance, therefore, make sure that you have an AWS account and set up appropriate permissions for users. I used a root account when setting up my first server because it was far more convenient. We will be creating an instance, which is basically a <a href="https://en.wikipedia.org/wiki/Virtual_machine">virtual machine</a> that has an operating system preinstalled. </p>
+<h3 id="creating-an-instance">Creating an Instance</h3>
+<p>Make sure you're logged into the Lightsail console. Once you are, you'll be able to create an instance. Click create instance and select the Linux/Unix for the platform. When selecting the blueprint, choose OS only because we will install all the tools necessary directly on the server. The OS we'll be using is Ubuntu 18.04. If you want you can add a launch script to run when the instance starts up. If you do I would recommend this as the launch script to get started:</p>
+<pre style="background-color:#212733;">
+<span style="color:#ccc9c2;">
+  </span><span style="color:#ffd580;">sudo</span><span style="color:#ccc9c2;"> apt-get update</span><span style="color:#ccc9c2;">
+  </span><span style="color:#ffd580;">sudo</span><span style="color:#ccc9c2;"> apt-get install build-essential  </span><span style="color:#ccc9c2;">
+</span><span style="color:#ccc9c2;">
+</span></pre>
+<p>These commands will update ubuntu and install build tools that you might need depending on your project and its dependencies. Now you can choose whichever plan you want. I'd recommend the $3.50 plan because the first month is free and it's sufficient for a first web server. For my first deployment, I opted for the $5 dollar plan because I was using Elasticsearch which required more memory than the cheapest plan offered. Name your instance and click <code>create instance</code>.</p>
+<h3 id="instance-management">Instance Management</h3>
+<p>Now your instance should be running; if not give it some time. Now click on the three vertical dots on your instance's information and click manage. Here you will be able to manage and view all relevant information regarding your instance. You can even <a href="https://en.wikipedia.org/wiki/SSH_(Secure_Shell)">SSH</a> using your browser. </p>
+<p>Before we SSH into the server we have to do some network management. Click on the networking tab. You'll be able to see ip addresses and information about the firewall. By default the firewall only allows SSH and HTTP traffic. I ran into a major problem where I enabled HTTPS on the web server, however, no HTTPS traffic was able to connect to the server. The problem was that the firewall managed through Lightsail console wasn't allowing HTTPS traffic. There wasn't a rule that allowed any IP to connect to port 443. I ended up spending many hours trying to figure why HTTPS wasn't working. If you don't plan to use HTTPS then you don't have to do this, but it is recommended to use HTTPS for security and privacy reasons. </p>
+<p>So go ahead and click Add rule. In the <code>application</code> dropdown, choose HTTPS. Once you've selected that, you can click create which will allow traffic through port 443. This port is used by the operating system for HTTPS traffic. </p>
+<h3 id="accessing-the-instance">Accessing the Instance</h3>
+<p>Now that the instance and firewall rules are setup you can SSH into the server. You can SSH in the browser but I recommend using the command line because it's more performant than the browser. If you're on windows, you can use their <a href="https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse">SSH Client</a>. If you can't use that then use <a href="https://www.ssh.com/ssh/putty/download">PuTTY</a>. If all of that is too much of a hassle then using the browser will give you a simpler experience. When using the command line make sure to download your private key. Download details can be found on the Lightsail console at the bottom of the <code>Connect</code> page for your instance.</p>
+<p>Download the private key and keep it somewhere safe. This key is used to securely access your server, so if someone else gets their hands on it then they will be able to do whatever they want on your server. You will most likely have to change the permissions for the private key in order for the ssh client to accept it. From now on I'll assume use of the SSH client on Linux and Windows 10. To access your server use the command: </p>
+<pre style="background-color:#212733;">
+<span style="color:#ccc9c2;">
+  </span><span style="color:#ffd580;">ssh</span><span style="color:#ffcc66;"> -i</span><span style="color:#ccc9c2;"> /path/to/private/key username@public.ip.address</span><span style="color:#ccc9c2;">
+</span><span style="color:#ccc9c2;">
+</span></pre>
+<p>The public IP address can be found under your connect tab on the Lightsail console and the username should be right under the public IP address.</p>
+<h2 id="setting-up-web-server">Setting up web server</h2>
+<p>Now that you're on the server, take this opportunity run the commands from the basic launch script if you didn't before. Install all the databases and packages needed to run your web server. Ensure that your web server is capable of serving static files, otherwise when you browse to your website nothing will show up. Your server will have to listen on <code>Port 80</code> because that port is available for internet traffic. Once your server is up and running, head to your browser and enter the public IP address of your server in the address bar. The public IP of the server can be found on Lightsail Console. Your website should now be on display and ready to use. At this point your website is up and running and you can stop here if this was all that was necessary. Going further we will add Nginx as a static file server and reverse proxy. We will also add <a href="https://www.cloudflare.com/learning/ssl/transport-layer-security-tls/">TLS</a> to secure the website.</p>
+<h2 id="setting-up-nginx">Setting up Nginx</h2>
+<p>We will be installing <a href="https://www.nginx.com/">Nginx</a>. Nginx will act as a <a href="https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/">reverse proxy</a> and file server. Nginx will also be used to enable HTTPS traffic for our server. To install Nginx on the server, execute:</p>
+<pre style="background-color:#212733;">
+<span style="color:#ccc9c2;">
+  </span><span style="color:#ffd580;">sudo</span><span style="color:#ccc9c2;"> apt install nginx</span><span style="color:#ccc9c2;">
+</span><span style="color:#ccc9c2;">
+</span></pre>
+<p>A lot of information I'll explain about setting up Nginx can be found on this very helpful <a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04">DigitalOcean article</a>. Refer to it if anything doesn't make sense because it's where I got my knowledge. Nginx should be running; check it's status with:</p>
+<pre style="background-color:#212733;">
+<span style="color:#ccc9c2;">
+  </span><span style="color:#ffd580;">sudo</span><span style="color:#ccc9c2;"> systemctl status nginx</span><span style="color:#ccc9c2;">
+</span><span style="color:#ccc9c2;">
+</span></pre>
+<p>The output should be something like:</p>
+<pre style="background-color:#212733;">
+<span style="color:#ccc9c2;">
+  ● nginx.service - A high performance web server and a reverse proxy server</span><span style="color:#ccc9c2;">
+    Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)</span><span style="color:#ccc9c2;">
+    Active: active (running) since Mon 2020-09-14 00:06:41 UTC; 13h ago</span><span style="color:#ccc9c2;">
+      Docs: man:nginx(8)</span><span style="color:#ccc9c2;">
+    Process: 21581 ExecStop=/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /run/nginx.pid (code=exited, status=0/SUCCESS)</span><span style="color:#ccc9c2;">
+    Process: 21525 ExecReload=/usr/sbin/nginx -g daemon on; master_process on; -s reload (code=exited, status=0/SUCCESS)</span><span style="color:#ccc9c2;">
+    Process: 21594 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)</span><span style="color:#ccc9c2;">
+    Process: 21582 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)</span><span style="color:#ccc9c2;">
+  Main PID: 21598 (nginx)</span><span style="color:#ccc9c2;">
+      Tasks: 2 (limit: 536)</span><span style="color:#ccc9c2;">
+    CGroup: /system.slice/nginx.service</span><span style="color:#ccc9c2;">
+            ├─21598 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;</span><span style="color:#ccc9c2;">
+</span><span style="color:#ccc9c2;">
+</span></pre>
+<p>To see your server working, enter your server's public IP address into your web browser and you should see the Nginx landing page. If your web server is still running from before, stop it so that Nginx can listen on <code>port 80</code>.</p>
+<!-- Put Nginx default page picture here -->
+<h3 id="nginx-serving-static-files">Nginx Serving Static Files</h3>
+<p>Server blocks allow you configure and host more than one website from a single server. Now we will move your website's files onto the server, mostly likely with a <code>git clone</code>. We will tell Nginx to serve the static files for your website. In order to do this, we'll create a server block in an Nginx configuration file. Nginx configuration files go in <code>/etc/nginx/sites-available</code>. Create one for your website with:</p>
+<pre style="background-color:#212733;">
+<span style="color:#ccc9c2;">
+  </span><span style="color:#ffd580;">sudo</span><span style="color:#ccc9c2;"> nano /etc/nginx/sites-available/</span><span style="color:#f29e74;">&lt;</span><span style="color:#ccc9c2;">your site name</span><span style="color:#f29e74;">&gt;</span><span style="color:#ccc9c2;">
+</span><span style="color:#ccc9c2;">
+</span></pre>
+<p>You can also do <code>sudo vim</code> if you're comfortable with vim. Copy and paste this into the file:</p>
+<pre style="background-color:#212733;">
+<span style="color:#ccc9c2;">
+  server {</span><span style="color:#ccc9c2;">
+          listen 80;</span><span style="color:#ccc9c2;">
+          listen [::]:80;</span><span style="color:#ccc9c2;">
+</span><span style="color:#ccc9c2;">
+          root path/to/frontend/folder;</span><span style="color:#ccc9c2;">
+          index index.html index.htm index.nginx-debian.html;</span><span style="color:#ccc9c2;">
+</span><span style="color:#ccc9c2;">
+          server_name &lt;yourdomainname&gt; &lt;yourserveripaddress&gt;;</span><span style="color:#ccc9c2;">
+  }</span><span style="color:#ccc9c2;">
+</span><span style="color:#ccc9c2;">
+</span></pre>
+<p>This server block tells Nginx to listen on port 80. The <code>root</code> is the path to your frontend or static files, which Nginx will serve if they are requested. The next line tells Nginx to look for and serve <code>index.html</code> within that folder. The <code>server_name</code> can be either the name of your website, if you own a domain and pointed your server's ip address to it, or the public ip address of your server. This is the address you put in the browser's address bar to go to your website. You can also put both the ip address and the domain if you want to allow using the ip address to find your website.</p>
+<p>We have to enable this configuration, otherwise Nginx will not see it. We can do this by creating a symlink from it to the <code>sites-enabled</code> directory like so:</p>
+<pre style="background-color:#212733;">
+<span style="color:#ccc9c2;">
+  </span><span style="color:#ffd580;">sudo</span><span style="color:#ccc9c2;"> ln</span><span style="color:#ffcc66;"> -s</span><span style="color:#ccc9c2;"> /etc/nginx/sites-available/</span><span style="color:#f29e74;">&lt;</span><span style="color:#ccc9c2;">your site name</span><span style="color:#f29e74;">&gt;</span><span style="color:#ccc9c2;"> /etc/nginx/sites-enabled/</span><span style="color:#ccc9c2;">
+</span><span style="color:#ccc9c2;">
+</span></pre>
+<p>Now restart Nginx in order for it to see the changes with:</p>
+<pre style="background-color:#212733;">
+<span style="color:#ccc9c2;">
+  </span><span style="color:#ffd580;">sudo</span><span style="color:#ccc9c2;"> systemctl restart nginx</span><span style="color:#ccc9c2;">
+</span><span style="color:#ccc9c2;">
+</span></pre>
+<p>Go to your browser and go to your website; it should be working now. If your goal was to only serve static files then your job is finished. The next steps will be making Nginx a reverse proxy and adding TLS to your website.</p>
+<h3 id="nginx-reverse-proxy">Nginx Reverse Proxy</h3>
+<!-- This first sentence is a bit awkward -->
+<p>For our small deployment, Nginx isn't absolutely necessary as a reverse proxy, however it becomes useful if you want to add easy performance gains, load balancing and deploy multiple websites on one server. <a href="https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/">Reverse proxying</a> is when a request received by Nginx is forwarded to another server. We will have Nginx do a proxy pass to your web server which will be listening on another port for requests. Learn more about setting up Nginx to be a reverse proxy from this <a href="https://www.digitalocean.com/community/tutorials/understanding-nginx-http-proxying-load-balancing-buffering-and-caching">article</a>.</p>
+<p>Open the configuration file for your website and add this to your server block: </p>
+<pre style="background-color:#212733;">
+<span style="color:#ccc9c2;">
+  location / {</span><span style="color:#ccc9c2;">
+          proxy_pass http://localhost:8000;</span><span style="color:#ccc9c2;">
+  }</span><span style="color:#ccc9c2;">
+</span><span style="color:#ccc9c2;">
+</span></pre>
+<p>This new line tells nginx to forward requests to local port 8000. If you have a server listening on port 8000, then it will receive requests. Feel free to change the port to whichever port your server will listen on. To check to see if this working, start your server and restart nginx. If your website is showing a <code>502</code> error then it's possible that your web server crashed and Nginx isn't getting valid responses from it. It's also possible that, if you're using a library or framework to create your webserver, it might not work correctly with a reverse proxy server out of the box. There might be special settings or a configuration that lets it work correctly with Nginx.</p>
+<p>From here, check that your web server are receiving all the appropriate requests and that your website is working correctly. </p>
+<h2 id="securing-your-server-with-tls">Securing Your Server With TLS</h2>
+<p>Before you can secure your server with TLS, you'll need to get your own <a href="https://en.wikipedia.org/wiki/Domain_name">domain</a>. Then you will need to update your Nginx configuration to respond to the domain request by changing the <code>server_name</code> Nginx responds to:</p>
+<pre style="background-color:#212733;">
+<span style="color:#ccc9c2;">
+  server_name yourdomain.com;</span><span style="color:#ccc9c2;">
+</span><span style="color:#ccc9c2;">
+</span></pre>
+<p>Substitute &quot;yourdomain.com&quot; with your actual domain name and Nginx will respond to requests to your domain.</p>
+<p>You can refer back to this <a href="https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-18-04">article</a> on how to setup TLS for your web server. You will first install Certbot with:</p>
+<pre style="background-color:#212733;">
+<span style="color:#ccc9c2;">
+  </span><span style="color:#ffd580;">sudo</span><span style="color:#ccc9c2;"> apt-get install certbot</span><span style="color:#ccc9c2;">
+</span><span style="color:#ccc9c2;">
+</span></pre>
+<p>To allow certbot to configure ssl in your Nginx configuration run:</p>
+<pre style="background-color:#212733;">
+<span style="color:#ccc9c2;">
+  </span><span style="color:#ffd580;">sudo</span><span style="color:#ccc9c2;"> certbot</span><span style="color:#ffcc66;"> --nginx -d</span><span style="color:#ccc9c2;"> yourdomain.com</span><span style="color:#ccc9c2;">
+</span><span style="color:#ccc9c2;">
+</span></pre>
+<p>This runs certbot with the nginx plugin and -d specifies which names the certificate will be valid for.</p>
+<p>With this, connections to your website will be secure. After this, consider allowing certbot to automatically renew your certificates. Certificates expire after a period of time. Certificates issued by <a href="https://letsencrypt.org/">Let's Encrypt</a> expire after 90 days. You can tell certbot to automatically renew with the command:</p>
+<pre style="background-color:#212733;">
+<span style="color:#ccc9c2;">
+  </span><span style="color:#ffd580;">sudo</span><span style="color:#ccc9c2;"> certbot renew</span><span style="color:#ccc9c2;">
+</span><span style="color:#ccc9c2;">
+</span></pre>
+<p>Certbot will now renew the certificate within 30 days of expiration.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>If you've made it this far then you should have a secure web server behind a reverse proxy. There is still more work to do to optimize Nginx's performance; you can follow these two links to optimize Nginx's configuration:</p>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-optimize-nginx-configuration">https://www.digitalocean.com/community/tutorials/how-to-optimize-nginx-configuration</a></li>
+<li><a href="https://www.nginx.com/blog/tuning-nginx/">https://www.nginx.com/blog/tuning-nginx/</a></li>
+</ul>
+<p>I hope this tutorial was helpful in deploying your first website. Thank you for reading! </p>
+
+      </article>
+    </div>
+  </main>
+
+<body>
+<html>

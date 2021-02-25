@@ -20,6 +20,9 @@ a {
     color: rgb(238, 92, 87);
     text-decoration: none;
 }
+li > a {
+    font-family: "Kumbh Sans", sans-serif;
+}
 
 p {
     font-family: "Kumbh Sans", sans-serif;
